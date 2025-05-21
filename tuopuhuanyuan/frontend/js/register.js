@@ -1,123 +1,73 @@
-document.addEventListener('DOMContentLoaded', function() {
-    let currentCaptcha = '';
-
+document.addEventListener('DOMContentLoaded', function () {
     const registerForm = document.getElementById('registerForm');
-    const registerLink = document.getElementById('registerLink');
-    const captchaImg = document.getElementById('captchaImg');
 
-    // 生成验证码
-    function generateCaptcha() {
-        const chars = '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY';
-        const length = 4;
-        let code = '';
-        for (let i = 0; i < length; i++) {
-            code += chars[Math.floor(Math.random() * chars.length)];
-        }
-        currentCaptcha = code;
-        return code;
+    if (!registerForm) {
+        console.error('注册表单未找到');
+        return;
     }
 
-    // 创建验证码图片
-    function createCaptchaImage() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 100;
-        canvas.height = 38;
-        const ctx = canvas.getContext('2d');
+    registerForm.addEventListener('submit', async function (e) {
+        e.preventDefault(); // 阻止表单默认提交行为
 
-        // 设置背景色
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
 
-        // 添加干扰线
-        for (let i = 0; i < 5; i++) {
-            ctx.strokeStyle = `rgb(${Math.random() * 50 + 150}, ${Math.random() * 50 + 150}, ${Math.random() * 50 + 150})`;
-            ctx.beginPath();
-            ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
-            ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
-            ctx.stroke();
+        if (!usernameInput || !passwordInput || !confirmPasswordInput) {
+            console.error('输入框缺失');
+            return;
         }
 
-        // 添加干扰点
-        for (let i = 0; i < 100; i++) {
-            ctx.fillStyle = `rgb(${Math.random() * 50 + 150}, ${Math.random() * 50 + 150}, ${Math.random() * 50 + 150})`;
-            ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 1, 1);
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        // 表单校验逻辑
+        if (!username || !password || !confirmPassword) {
+            alert('所有字段不能为空');
+            return;
         }
 
-        // 写入验证码文字
-        const code = generateCaptcha();
-        for (let i = 0; i < code.length; i++) {
-            ctx.fillStyle = `rgb(${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 100})`;
-            ctx.font = `${Math.random() * 4 + 18}px Arial`;
-            ctx.fillText(code[i], 20 + i * 20, Math.random() * 10 + 25);
+        if (password.length < 6) {
+            alert('密码长度不能少于6位');
+            return;
         }
 
-        return canvas.toDataURL();
-    }
-
-    // 初始化验证码
-    function initCaptcha() {
-        if (captchaImg) {
-            captchaImg.src = createCaptchaImage();
+        if (password !== confirmPassword) {
+            alert('两次密码输入不一致');
+            return;
         }
-    }
 
-    // 点击验证码图片刷新
-    if (captchaImg) {
-        captchaImg.addEventListener('click', function() {
-            initCaptcha();
-        });
-    }
+        try {
+            // 发送注册请求
+            const response = await fetch('http://127.0.0.1:8000/auth/api/register/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                }),
+                credentials: 'include'  // 发送cookie（如有需要）
+            });
 
-    // 初始化验证码
-    initCaptcha();
+            const data = await response.json();
 
-    // 表单提交处理
-    const form = document.getElementById('registerForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const captcha = document.getElementById('captcha').value;
-            const agreeTerms = document.getElementById('agreeTerms').checked;
-        
-
-            // 验证码验证
-            if (captcha.toLowerCase() !== currentCaptcha.toLowerCase()) {
-                alert('验证码错误，请重新输入');
-                initCaptcha();
-                document.getElementById('captcha').value = '';
-                return;
+            if (response.ok) {
+                alert('注册成功，正在跳转到登录页...');
+                setTimeout(() => {
+                    window.location.href = './login.html';  // 跳转到登录页
+                }, 1000);
+            } else {
+                alert(data.error || '注册失败，请检查输入');
             }
 
-            // 验证密码是否匹配
-            if (password !== confirmPassword) {
-                alert('两次输入的密码不一致');
-                document.getElementById('password').value = '';
-                document.getElementById('confirmPassword').value = '';
-                document.getElementById('captcha').value = '';
-                initCaptcha();
-                return;
-            }
+        } catch (error) {
+            console.error('注册请求失败:', error);
+            alert('网络异常，请稍后重试');
+        }
+    });
 
-            // 验证是否同意条款
-            if (!agreeTerms) {
-                alert('请阅读并同意服务条款和隐私政策');
-                return;
-            }
-
-            // 验证必填字段
-            if (!username || !email || !password) {
-                alert('请填写完整信息');
-                return;
-            }
-
-            // 这里添加注册逻辑
-            alert('注册成功，请登录');
-            window.location.href = 'login.html';
-        });
-    }
-}); 
+    
+});
