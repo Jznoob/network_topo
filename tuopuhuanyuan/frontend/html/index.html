@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 网络拓扑还原系统</title>
+    <link rel="stylesheet" href="../css/common.css">
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    
+</head>
+<body class="index-page">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-diagram-3"></i>
+                网络拓扑还原系统
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-house-door me-1"></i>首页
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="config.html">
+                            <i class="bi bi-gear me-1"></i>配置输入
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topology.html">
+                            <i class="bi bi-diagram-2 me-1"></i>拓扑展示
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="history.html">
+                            <i class="bi bi-clock-history me-1"></i>历史记录
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown ms-auto">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+                        <img src="https://www.keaitupian.cn/cjpic/frombd/1/253/2254279502/2118993253.jpg" alt="用户头像" class="navbar-avatar me-2">
+                        用户名
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="profile.html">个人中心</a></li>
+                        <li><a class="dropdown-item" href="login.html">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron bg-light p-5 rounded-3">
+                    <h1 class="display-4">欢迎使用网络拓扑还原系统</h1>
+                    <p class="lead">这是一个用于还原和展示网络拓扑结构的专业工具</p>
+                    <hr class="my-4">
+                    <p>您可以通过上传配置文件，快速生成可视化的网络拓扑图</p>
+                    <a class="btn btn-primary btn-lg" href="config.html" role="button">开始使用</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-file-earmark-text display-4 text-primary"></i>
+                        </div>
+                        <h5 class="card-title text-center">配置输入</h5>
+                        <p class="card-text text-center">上传网络配置文件，支持多种格式</p>
+                        <div class="text-center">
+                            <a href="config.html" class="btn btn-outline-primary">进入配置</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-diagram-3 display-4 text-success"></i>
+                        </div>
+                        <h5 class="card-title text-center">拓扑展示</h5>
+                        <p class="card-text text-center">直观展示网络拓扑结构，支持交互操作</p>
+                        <div class="text-center">
+                            <a href="topology.html" class="btn btn-outline-success">查看拓扑</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <i class="bi bi-clock-history display-4 text-info"></i>
+                        </div>
+                        <h5 class="card-title text-center">历史记录</h5>
+                        <p class="card-text text-center">查看和管理历史拓扑记录</p>
+                        <div class="text-center">
+                            <a href="history.html" class="btn btn-outline-info">查看历史</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最近活动 -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">最近活动</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>操作</th>
+                                        <th>描述</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2024-03-20 14:30</td>
+                                        <td>创建拓扑</td>
+                                        <td>公司网络拓扑</td>
+                                        <td><span class="badge bg-success">已完成</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-03-19 10:15</td>
+                                        <td>修改配置</td>
+                                        <td>数据中心网络</td>
+                                        <td><span class="badge bg-warning">进行中</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-03-18 16:45</td>
+                                        <td>导出拓扑</td>
+                                        <td>校园网络拓扑</td>
+                                        <td><span class="badge bg-success">已完成</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>

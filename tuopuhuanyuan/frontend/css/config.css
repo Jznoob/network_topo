@@ -1,0 +1,61 @@
+/* 配置页面样式 */
+.CodeMirror {
+    height: 400px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.config-editor {
+    margin-top: 1rem;
+}
+
+.config-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.config-actions .btn {
+    flex: 1;
+}
+
+.file-upload {
+    margin-bottom: 1rem;
+}
+
+.config-type-select {
+    margin-bottom: 1rem;
+}
+
+/* 编辑器工具栏样式 */
+.editor-toolbar {
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 0.25rem 0.25rem 0 0;
+    border: 1px solid #dee2e6;
+    border-bottom: none;
+}
+
+.editor-toolbar .btn-group {
+    margin-right: 0.5rem;
+}
+
+/* 文件上传区域样式 */
+.upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.25rem;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.upload-area.dragover {
+    border-color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+} 

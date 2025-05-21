@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史记录 - 网络拓扑还原系统</title>
+    <link rel="stylesheet" href="../css/history.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-diagram-3"></i>
+                网络拓扑还原系统
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-house-door me-1"></i>首页
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="config.html">
+                            <i class="bi bi-gear me-1"></i>配置输入
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topology.html">
+                            <i class="bi bi-diagram-2 me-1"></i>拓扑展示
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="history.html">
+                            <i class="bi bi-clock-history me-1"></i>历史记录
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown ms-auto">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+                        <img src="https://www.keaitupian.cn/cjpic/frombd/1/253/2254279502/2118993253.jpg" alt="用户头像" class="navbar-avatar me-2">
+                        用户名
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="profile.html">个人中心</a></li>
+                        <li><a class="dropdown-item" href="login.html">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">历史记录</h5>
+                        
+                        <!-- 搜索和筛选 -->
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="搜索历史记录...">
+                                    <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="filterType">
+                                    <option value="all">所有类型</option>
+                                    <option value="router">路由器</option>
+                                    <option value="switch">交换机</option>
+                                    <option value="server">服务器</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="sortBy">
+                                    <option value="date-desc">按日期降序</option>
+                                    <option value="date-asc">按日期升序</option>
+                                    <option value="name-asc">按名称升序</option>
+                                    <option value="name-desc">按名称降序</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-danger w-100" id="clearHistory">
+                                    <i class="bi bi-trash"></i> 清空历史
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 历史记录列表 -->
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>类型</th>
+                                        <th>创建时间</th>
+                                        <th>节点数量</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historyList">
+                                    <!-- 示例数据 -->
+                                    <tr>
+                                        <td>公司网络拓扑</td>
+                                        <td><span class="badge bg-primary">路由器</span></td>
+                                        <td>2024-03-20 14:30</td>
+                                        <td>15</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" onclick="viewTopology(1)">
+                                                <i class="bi bi-eye"></i> 查看
+                                            </button>
+                                            <button class="btn btn-sm btn-success" onclick="exportTopology(1)">
+                                                <i class="bi bi-download"></i> 导出
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteTopology(1)">
+                                                <i class="bi bi-trash"></i> 删除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据中心网络</td>
+                                        <td><span class="badge bg-success">交换机</span></td>
+                                        <td>2024-03-19 10:15</td>
+                                        <td>8</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" onclick="viewTopology(2)">
+                                                <i class="bi bi-eye"></i> 查看
+                                            </button>
+                                            <button class="btn btn-sm btn-success" onclick="exportTopology(2)">
+                                                <i class="bi bi-download"></i> 导出
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteTopology(2)">
+                                                <i class="bi bi-trash"></i> 删除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 分页 -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">上一页</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">下一页</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 搜索功能
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var searchText = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.querySelectorAll('#historyList tr');
+            
+            rows.forEach(function(row) {
+                var text = row.textContent.toLowerCase();
+                if (text.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // 类型筛选
+        document.getElementById('filterType').addEventListener('change', function(e) {
+            var filterType = e.target.value;
+            var rows = document.querySelectorAll('#historyList tr');
+            
+            rows.forEach(function(row) {
+                if (filterType === 'all') {
+                    row.style.display = '';
+                } else {
+                    var type = row.querySelector('.badge').textContent.toLowerCase();
+                    if (type === filterType) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // 清空历史
+        document.getElementById('clearHistory').addEventListener('click', function() {
+            if (confirm('确定要清空所有历史记录吗？此操作不可恢复。')) {
+                document.getElementById('historyList').innerHTML = '';
+            }
+        });
+
+        // 查看拓扑
+        function viewTopology(id) {
+            window.location.href = 'topology.html?id=' + id;
+        }
+
+        // 导出拓扑
+        function exportTopology(id) {
+            // 实现导出功能
+            alert('导出拓扑图 ' + id);
+        }
+
+        // 删除拓扑
+        function deleteTopology(id) {
+            if (confirm('确定要删除此拓扑记录吗？')) {
+                // 实现删除功能
+                alert('删除拓扑图 ' + id);
+            }
+        }
+    </script>
+</body>
+</html>

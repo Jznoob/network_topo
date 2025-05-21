@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>登录示范</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #a0a0a0;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #d9534f; /* 红色错误 */
+      min-height: 24px;
+      text-align: center;
+    }
+    #result.success {
+      color: #28a745; /* 绿色成功 */
+    }
+  </style>
+</head>
+<body>
+  <h1>用户登录</h1>
+  
+  <label for="username">用户名</label>
+  <input type="text" id="username" placeholder="请输入用户名" autocomplete="username" />
+  
+  <label for="password">密码</label>
+  <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" />
+  
+  <button id="loginBtn">登录</button>
+  
+  <div id="result"></div>
+  
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const resultDiv = document.getElementById('result');
+
+    loginBtn.addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        resultDiv.textContent = '用户名和密码不能为空';
+        resultDiv.className = '';
+        return;
+      }
+
+      // 按钮禁用，避免重复点击
+      loginBtn.disabled = true;
+      resultDiv.textContent = '正在登录...';
+      resultDiv.className = '';
+
+      fetch('http://127.0.0.1:8000/api/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP 错误：${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (data.code === 200) {
+          resultDiv.textContent = '登录成功！';
+          resultDiv.className = 'success';
+        } else {
+          resultDiv.textContent = data.msg || '登录失败';
+          resultDiv.className = '';
+        }
+      })
+      .catch(err => {
+        resultDiv.textContent = '请求失败：' + err.message;
+        resultDiv.className = '';
+      })
+      .finally(() => {
+        loginBtn.disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>

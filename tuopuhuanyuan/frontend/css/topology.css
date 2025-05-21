@@ -1,0 +1,79 @@
+/* 拓扑展示页面样式 */
+.navbar-avatar {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+#topologyNetwork {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    border: 1px solid #dee2e6;
+}
+
+.control-panel {
+    position: sticky;
+    top: 1rem;
+}
+
+.control-panel .card {
+    margin-bottom: 1rem;
+}
+
+.node-info {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.node-info-card {
+    margin-top: 1rem;
+}
+
+/* 控制面板表单样式 */
+.control-panel .form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.control-panel .form-select,
+.control-panel .form-range {
+    margin-bottom: 1rem;
+}
+
+/* 节点信息样式 */
+.node-details {
+    padding: 1rem;
+}
+
+.node-details p {
+    margin-bottom: 0.5rem;
+}
+
+.node-details strong {
+    color: #495057;
+}
+
+/* 导出按钮样式 */
+.export-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.export-buttons .btn {
+    flex: 1;
+}
+
+/* 布局控制样式 */
+.layout-controls {
+    margin-bottom: 1rem;
+}
+
+.layout-controls .btn-group {
+    width: 100%;
+}
+
+.layout-controls .btn {
+    flex: 1;
+} 

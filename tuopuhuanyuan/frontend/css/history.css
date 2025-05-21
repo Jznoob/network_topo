@@ -1,0 +1,86 @@
+/* 历史记录页面样式 */
+.history-search {
+    margin-bottom: 1.5rem;
+}
+
+.history-filters {
+    margin-bottom: 1.5rem;
+}
+
+.history-table {
+    margin-bottom: 1.5rem;
+}
+
+.history-table th {
+    font-weight: 500;
+    background-color: #f8f9fa;
+}
+
+.history-table td {
+    vertical-align: middle;
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-buttons .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+/* 状态标签样式 */
+.status-badge {
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+}
+
+/* 分页样式 */
+.pagination {
+    margin-top: 1.5rem;
+}
+
+.pagination .page-link {
+    padding: 0.5rem 0.75rem;
+}
+
+/* 搜索框样式 */
+.search-box {
+    position: relative;
+}
+
+.search-box .form-control {
+    padding-right: 2.5rem;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+/* 筛选器样式 */
+.filter-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-group .form-select {
+    flex: 1;
+}
+
+/* 空状态样式 */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #6c757d;
+}
+
+.empty-state .bi {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+} 

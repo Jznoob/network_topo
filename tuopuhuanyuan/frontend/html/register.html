@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - 网络拓扑还原系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <link href="../css/register.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-diagram-3"></i>
+                网络拓扑还原系统
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="register-container">
+        <div class="register-card">
+            <h2 class="text-center mb-4">用户注册</h2>
+            <form id="registerForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">用户名</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="username" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">邮箱</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">密码</label>
+                    <div class="input-group">  
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">确认密码</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="captcha" class="form-label">验证码</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-shield-check"></i></span>
+                        <input type="text" class="form-control" id="captcha" required>
+                        <img src="../php/register-captcha.php" alt="验证码" class="captcha-img" id="captchaImg">
+                    </div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                    <label class="form-check-label" for="agreeTerms">
+                        我已阅读并同意
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">服务条款和隐私政策</a>
+                    </label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="bi bi-person-plus me-2"></i>注册
+                    </button>
+                    <a href="login.html" class="btn btn-link text-center">已有账号？立即登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 服务条款和隐私政策弹窗 -->
+    <div class="modal fade" id="termsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">服务条款和隐私政策</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>服务条款</h6>
+                    <p>1. 用户注册成功后，将获得一个账号和密码，用户应当对账号和密码的安全负责。</p>
+                    <p>2. 用户不得将账号转让或出借给他人使用。</p>
+                    <p>3. 用户在使用本服务时，必须遵守中华人民共和国相关法律法规的规定。</p>
+                    
+                    <h6 class="mt-4">隐私政策</h6>
+                    <p>1. 我们承诺保护您的个人信息安全。</p>
+                    <p>2. 我们不会向任何第三方提供、公开或共享您的个人信息。</p>
+                    <p>3. 我们可能会使用您的个人信息来提供更好的服务。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/register.js"></script>
+</body>
+</html> 
