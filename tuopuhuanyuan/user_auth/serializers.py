@@ -17,7 +17,6 @@ class LoginSerializer(serializers.Serializer):
         return attrs
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
@@ -34,5 +33,5 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data.pop('password2')
-        user = User.objects.create(**validated_data)
+        user = User.objects.create_user(**validated_data)
         return user

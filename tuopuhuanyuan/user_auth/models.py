@@ -22,28 +22,20 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username}的个人信息"
 
-class PasswordResetToken(models.Model):
-    """
-    密码重置令牌模型
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reset_tokens')
-    token = models.CharField(max_length=100, unique=True, verbose_name='重置令牌')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    expires_at = models.DateTimeField(verbose_name='过期时间')
-    is_used = models.BooleanField(default=False, verbose_name='是否已使用')
+# models.py
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 
-    class Meta:
-        verbose_name = '密码重置令牌'
-        verbose_name_plural = verbose_name
+class EmailVerificationCode(models.Model):
+    email = models.EmailField()
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.user.username}的密码重置令牌"
+    def is_expired(self):
+        return timezone.now() > self.created_at + timezone.timedelta(minutes=10)
 
-    def is_valid(self):
-        """
-        检查令牌是否有效
-        """
-        return not self.is_used and self.expires_at > timezone.now()
 
 class LoginHistory(models.Model):
     """

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'captcha',
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -232,10 +234,10 @@ CAPTCHA_MATH_CHALLENGE_MAX = 10  # 数学验证码最大值
 # REST Framework 配置
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -252,9 +254,17 @@ REST_FRAMEWORK = {
 
 # 邮箱配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = '2035733229@qq.com'
-EMAIL_HOST_PASSWORD = 'dyeocjexrbyveafh'  # 注意：不是邮箱密码，是 QQ 邮箱生成的"授权码"
+EMAIL_HOST_USER = 'wenhanfan11@gmail.com'
+EMAIL_HOST_PASSWORD = 'biwbrdqnyjaeyvib'  # 注意：不是邮箱密码，是 QQ 邮箱生成的"授权码"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+}

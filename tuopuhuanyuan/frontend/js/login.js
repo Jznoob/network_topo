@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     localStorage.removeItem('rememberedUsername');
                 }
-                
+
                 // 保存登录状态和用户信息
                 sessionStorage.setItem('isLoggedIn', 'true');
                 sessionStorage.setItem('currentUser', JSON.stringify(data.user));
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('登录请求失败，请稍后重试');
         }
     });
-
+    
     // 注册链接点击事件
     if (registerLink) {
         registerLink.addEventListener('click', function(e) {
