@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const registerLink = document.getElementById('registerLink');
-    let currentCaptcha = '';
 
     // 检查必要的 DOM 元素是否存在
     if (!loginForm) {
@@ -9,22 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // 获取CSRF Token
-    function getCSRFToken() {
-        const name = 'csrftoken';
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
+ 
 
     // 登录表单提交
     loginForm.addEventListener('submit', async function(e) {
@@ -44,12 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = passwordInput.value;
 
         try {
-            // 获取CSRF令牌
-            // const csrfToken = getCSRFToken();
-            // if (!csrfToken) {
-            //     alert('无法获取安全令牌，请刷新页面重试');
-            //     return;
-            // }
+       
 
             // 发送登录请求
             const response = await fetch('http://127.0.0.1:8000/auth/api/login/', {
@@ -81,13 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitButton.disabled = true;
                 }
                 
-                // 如果选择了"记住我"，保存用户名
-                if (rememberMe) {
-                    localStorage.setItem('rememberedUsername', username);
-                } else {
-                    localStorage.removeItem('rememberedUsername');
-                }
-
                 // 保存登录状态和用户信息
                 sessionStorage.setItem('isLoggedIn', 'true');
                 sessionStorage.setItem('currentUser', JSON.stringify(data.user));
@@ -107,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('登录请求失败，请稍后重试');
         }
     });
-    
+
     // 注册链接点击事件
     if (registerLink) {
         registerLink.addEventListener('click', function(e) {

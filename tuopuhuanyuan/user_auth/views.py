@@ -47,6 +47,7 @@ def register_api(request):
             'user': UserSerializer(user).data
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@csrf_exempt
 def login_api(request):
     if request.method == 'POST':
         try:
@@ -165,8 +166,8 @@ def forgot_password_api(request):
     EmailVerificationCode.objects.create(email=email, code=code)
     send_mail(
         'Network Topology Restoration',
-        'Reset Password Verification Code',
-        f'Your verification code is: {code}, valid within 10 minutes.',
+        f'Reset Password Verification Code:Your verification code is: {code}, valid within 10 minutes.',
+        'wenhanfan11@gmail.com',
         [email],
         fail_silently=False,
     )
@@ -177,11 +178,24 @@ def forgot_password_api(request):
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
+
+#{
+#    "email" : "1113843656@qq.com",
+#    "code" : "396452", 
+#    "new_password" : "123321"
+#}
 def reset_password_api(request):
     email = request.data.get('email')
     code = request.data.get('code')
     new_password = request.data.get('new_password')
-
+    if not email:
+        print(email)
+    
+    if not code:
+        print(code)
+    if not new_password:
+        print(new_password)
+        
     if not email or not code or not new_password:
         return Response({'error': '缺少必要字段'}, status=status.HTTP_400_BAD_REQUEST)
 
