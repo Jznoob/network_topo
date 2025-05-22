@@ -47,20 +47,22 @@ document.addEventListener('DOMContentLoaded', function () {
     forgotForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
+        const usernameInput = document.getElementById('username');
         const emailInput = document.getElementById('email');
         const captchaInput = document.getElementById('code');
         const newPasswordInput = document.getElementById('new_Password');
 
-        if (!emailInput || !captchaInput || !newPasswordInput) {
+        if (!usernameInput || !emailInput || !captchaInput || !newPasswordInput) {
             console.error('输入框缺失');
             return;
         }
 
+        const username = usernameInput.value.trim();
         const email = emailInput.value.trim();
         const captcha = captchaInput.value.trim();
         const newPassword = newPasswordInput.value;
 
-        if (!email || !captcha || !newPassword) {
+        if (!username || !email || !captcha || !newPassword) {
             alert('所有字段均为必填');
             return;
         }
@@ -77,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    username: username,
                     email: email,
                     code: captcha,
                     new_password: newPassword

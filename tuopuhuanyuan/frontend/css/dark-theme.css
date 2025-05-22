@@ -1,0 +1,328 @@
+/* 深色主题样式 */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* 导航栏样式 */
+body.dark-theme .navbar {
+    background-color: #2d2d2d !important;
+    border-bottom: 1px solid #404040;
+}
+
+body.dark-theme .navbar-dark .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+body.dark-theme .navbar-dark .navbar-nav .nav-link:hover {
+    color: #a0a0a0;
+}
+
+/* 下拉菜单样式 */
+body.dark-theme .dropdown-menu {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-theme .dropdown-item {
+    color: #ffffff !important;
+}
+
+body.dark-theme .dropdown-item:hover {
+    background-color: #404040;
+    color: #ffffff !important;
+}
+
+body.dark-theme .dropdown-toggle {
+    color: #ffffff !important;
+}
+
+body.dark-theme .dropdown-toggle:hover {
+    color: #a0a0a0 !important;
+}
+
+/* 卡片样式 */
+body.dark-theme .card {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-theme .card-body {
+    color: #ffffff;
+}
+
+body.dark-theme .card-header {
+    background-color: #333333;
+    border-bottom-color: #404040;
+}
+
+/* 表单控件样式 */
+body.dark-theme .form-control {
+    background-color: #333333;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+body.dark-theme .form-control:focus {
+    background-color: #404040;
+    color: #ffffff;
+    border-color: #505050;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .form-select {
+    background-color: #333333;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+body.dark-theme .form-select:focus {
+    background-color: #404040;
+    color: #ffffff;
+    border-color: #505050;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1);
+}
+
+/* 列表组样式 */
+body.dark-theme .list-group-item {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+body.dark-theme .list-group-item:hover {
+    background-color: #404040;
+}
+
+body.dark-theme .list-group-item.active {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* 文本颜色 */
+body.dark-theme .text-muted {
+    color: #ffffff !important;
+}
+
+body.dark-theme .text-primary {
+    color: #ffffff !important;
+}
+
+body.dark-theme .text-success {
+    color: #ffffff !important;
+}
+
+body.dark-theme .text-info {
+    color: #ffffff !important;
+}
+
+body.dark-theme .text-warning {
+    color: #ffffff !important;
+}
+
+body.dark-theme .text-danger {
+    color: #ffffff !important;
+}
+
+/* 按钮样式 */
+body.dark-theme .btn-outline-primary {
+    color: #6ea8fe;
+    border-color: #6ea8fe;
+}
+
+body.dark-theme .btn-outline-primary:hover {
+    background-color: #6ea8fe;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-outline-success {
+    color: #75b798;
+    border-color: #75b798;
+}
+
+body.dark-theme .btn-outline-success:hover {
+    background-color: #75b798;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-outline-info {
+    color: #6edff6;
+    border-color: #6edff6;
+}
+
+body.dark-theme .btn-outline-info:hover {
+    background-color: #6edff6;
+    color: #ffffff;
+}
+
+/* 表格样式 */
+/* 表格整体背景色 */
+body.dark-theme .table {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+/* 表头、单元格边框颜色 */
+body.dark-theme .table td,
+body.dark-theme .table th {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+/* 表头可设置为略深一点区分 */
+body.dark-theme .table thead th {
+    background-color: #333333;
+}
+
+/* 鼠标悬停效果 */
+body.dark-theme .table-hover tbody tr:hover {
+    background-color: #404040;
+    color: #ffffff;
+}
+
+
+body.dark-theme .table-hover tbody tr:hover {
+    background-color: #404040;
+    color: #ffffff;
+}
+
+/* 模态框样式 */
+body.dark-theme .modal-content {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-theme .modal-header {
+    border-bottom-color: #404040;
+}
+
+body.dark-theme .modal-footer {
+    border-top-color: #404040;
+}
+
+/* 分页样式 */
+body.dark-theme .pagination .page-link {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+body.dark-theme .pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+body.dark-theme .pagination .page-link:hover {
+    background-color: #404040;
+    color: #ffffff;
+}
+
+/* 拓扑图样式 */
+body.dark-theme #topologyNetwork {
+    background-color: #e0e0e0 !important;
+}
+
+/* 历史记录表格样式 */
+body.dark-theme .table-responsive {
+    border-color: #000000;
+}
+
+body.dark-theme .table td,
+body.dark-theme .table th {
+    border-color: #000000;
+}
+
+/* 滚动条样式 */
+body.dark-theme ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+body.dark-theme ::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+body.dark-theme ::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 4px;
+}
+
+body.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: #505050;
+}
+
+/* 徽章样式 */
+body.dark-theme .badge {
+    color: #ffffff;
+}
+
+/* 输入组样式 */
+body.dark-theme .input-group-text {
+    background-color: #333333;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+/* 警告框样式 */
+body.dark-theme .alert {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+/* 代码编辑器样式 */
+body.dark-theme .CodeMirror {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+body.dark-theme .CodeMirror-gutters {
+    background-color: #333333 !important;
+    border-right-color: #404040 !important;
+}
+
+/* 首页样式 */
+body.dark-theme .jumbotron {
+    background-color: #2d2d2d !important;
+    border: 1px solid #404040;
+}
+
+body.dark-theme .display-4 {
+    color: #ffffff;
+}
+
+body.dark-theme .lead {
+    color: #a0a0a0;
+}
+
+/* 历史记录搜索框样式 */
+body.dark-theme .input-group .form-control {
+    border-right: none;
+}
+
+body.dark-theme .input-group .btn-outline-secondary {
+    border-color: #404040;
+    color: #ffffff;
+}
+
+body.dark-theme .input-group .btn-outline-secondary:hover {
+    background-color: #404040;
+    color: #ffffff;
+}
+
+/* 首页主体文本颜色 */
+body.dark-theme .card-title {
+    color: #ffffff !important;
+}
+
+/* 最近活动表头样式 */
+body.dark-theme .table thead th {
+    background-color: #333333;
+    color: #ffffff;
+} 
+
+body.dark-theme #searchInput::placeholder {
+    color: #ffffff;
+    opacity: 1;  /* 防止某些浏览器透明度过低 */
+}

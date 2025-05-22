@@ -48,6 +48,21 @@
                         <input type="password" class="form-control" id="confirmPassword" required>
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">邮箱</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" required>
+                        <button type="button" class="btn btn-outline-secondary" id="sendCaptchaBtn">发送验证码</button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="code" class="form-label">验证码</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-shield-check"></i></span>
+                        <input type="text" class="form-control" id="code" required>
+                    </div>
+                </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="agreeTerms" required>
                     <label class="form-check-label" for="agreeTerms">
