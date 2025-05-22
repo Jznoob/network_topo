@@ -25,28 +25,70 @@ from django.contrib.auth.models import User
 from rest_framework.authentication import SessionAuthentication
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.core.cache import cache
+from .serializers import EmailSerializer
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def register_api(request):
-    """
-    用户注册 API
-    """
-    serializer = RegisterSerializer(data=request.data)
+@csrf_exempt
+def register_api_1(request):
+    print("bug")
+    serializer = EmailSerializer(data=request.data)
+    print("bug11")
     if serializer.is_valid():
-        # 创建用户
-        user = User.objects.create_user(
-            username=serializer.validated_data['username'],
-            password=serializer.validated_data['password'],  # 注意：实际应用中应该加密密码
-            email=serializer.validated_data['email']
+        email = serializer.validated_data['email']
+
+        # 生成6位数字验证码
+        verification_code = str(random.randint(100000, 999999))
+        
+        # 缓存验证码，设置过期时间，比如10分钟
+        cache_key = f'register_code_{email}'
+        cache.set(cache_key, {
+            'code': verification_code,
+        }, timeout=600)  # 600秒=10分钟
+
+        # 发送邮件
+        send_mail(
+            subject='注册验证码',
+            message=f'您的验证码是 {verification_code}，有效期10分钟。',
+            from_email=None,  # 默认发件人
+            recipient_list=[email],
+            fail_silently=False,
         )
-        # 创建用户档案
-        UserProfile.objects.create(user=user)
-        return Response({
-            'message': '注册成功',
-            'user': UserSerializer(user).data
-        }, status=status.HTTP_201_CREATED)
+        return Response({'message': '验证码已发送，请检查邮箱'}, status=status.HTTP_200_OK)
+
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+@csrf_exempt
+def register_api(request):
+    email = request.data.get('email')
+    code = request.data.get('code')
+    username = request.data.get('username')
+    password = request.data.get('password')
+    if not email or not code:
+        return Response({'error': '邮箱和验证码不能为空'}, status=status.HTTP_400_BAD_REQUEST)
+
+    cache_key = f'register_code_{email}'
+    cached = cache.get(cache_key)
+    print(f"[DEBUG] cache key: register_code_{email}")
+    print(f"[DEBUG] cached data: {cache.get(cache_key)}")
+    if cached is None:
+        return Response({'error': '验证码已过期或不存在'}, status=status.HTTP_400_BAD_REQUEST)
+    if cached['code'] != code:
+        print(f'{cached["code"]}')
+        return Response({'error': '验证码错误'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # 验证码正确，创建用户
+    user = User.objects.create_user(
+        username=username,
+        password=password,
+        email=email,
+    )
+    UserProfile.objects.create(user=user)
+
+    # 验证完成后清理缓存
+    cache.delete(cache_key)
+
+    return Response({'message': '注册成功'}, status=status.HTTP_201_CREATED)
 @csrf_exempt
 def login_api(request):
     if request.method == 'POST':
@@ -102,21 +144,15 @@ def profile_api(request):
     """
     获取用户信息 API
     """
-    try:
-        profile = UserProfile.objects.get(user=request.user)
-        return Response({
-            'user': UserSerializer(request.user).data,
-            'profile': {    
-                'phone': profile.phone,
-                'avatar': profile.avatar.url if profile.avatar else None,
-                'bio': profile.bio,
-                'created_at': profile.created_at,
-                'updated_at': profile.updated_at
-            }
-        })
-    except UserProfile.DoesNotExist:
-        return Response({'error': '用户档案不存在'}, status=status.HTTP_404_NOT_FOUND)
-
+    print(f"用户: {request.user}, 认证状态: {request.user.is_authenticated}")
+    return Response({
+        'user': UserSerializer(request.user).data,
+        'profile': {
+            'username' : request.user.username,
+            'email' : request.user.email,
+            'created_at' : request.user.date_joined,
+        }
+    })
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update_profile_api(request):

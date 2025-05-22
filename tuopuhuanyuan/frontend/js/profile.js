@@ -1,17 +1,26 @@
 window.addEventListener('DOMContentLoaded', async () => {
     // 获取用户信息
     try {
-        const response = await fetch('http://127.0.0.1:8000/auth/api/user-info/', {
+        const token = localStorage.getItem('jwt_token');
+        if (!token) {
+          throw new Error('No JWT token found');
+        }
+        const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/profile/', {
             method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json',  // GET 请求有时不写也行
+            },
             credentials: 'include',
         });
 
         const data = await response.json();
-
+        console.info('bug');
         if (response.ok) {
-            document.getElementById('username').value = data.username || '';
-            document.getElementById('email').value = data.email || '';
-            document.getElementById('registerTime').value = data.register_time || '';
+            console.info('data:', data);
+            document.getElementById('username').value = data.profile.username || '';
+            document.getElementById('email').value = data.profile.email || '';
+            document.getElementById('registerTime').value = new Date(data.profile.created_at).toLocaleString() ||  '';
         } else {
             alert(data.error || '获取用户信息失败');
         }
@@ -27,6 +36,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     // 提交修改密码表单
     const securityForm = document.getElementById('securityForm');
+    
     securityForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -39,8 +49,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        if (newPassword.length < 6) {
-            alert('新密码长度不能少于6位');
+        if (newPassword.length < 8) {
+            alert('新密码长度不能少于8位');
             return;
         }
 
@@ -48,18 +58,21 @@ window.addEventListener('DOMContentLoaded', async () => {
             alert('请填写完整的密码信息。');
             return;
         }
-
+        const token = localStorage.getItem('jwt_token');
+        console.log('token:', token);
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/api/change-password/', {
+            
+            const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/password/update/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token  // 携带JWT
                 },
+                credentials: 'include',  
                 body: JSON.stringify({
-                    oldpassword: oldPassword,
-                    newpassword: newPassword
+                    old_password: oldPassword,
+                    new_password: newPassword
                 }),
-                credentials: 'include'
             });
 
             const data = await response.json();

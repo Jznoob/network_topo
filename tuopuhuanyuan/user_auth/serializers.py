@@ -15,7 +15,8 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, attrs):
         # 这里可以添加额外的验证逻辑
         return attrs
-
+class EmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)

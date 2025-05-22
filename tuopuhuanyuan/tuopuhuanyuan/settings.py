@@ -230,8 +230,8 @@ CAPTCHA_IMAGE_SIZE_BEFORE_CROPPING = None  # 裁剪前图片大小
 CAPTCHA_MATH_CHALLENGE_OPERATOR = '+'  # 数学验证码运算符
 CAPTCHA_MATH_CHALLENGE_MIN = 1  # 数学验证码最小值
 CAPTCHA_MATH_CHALLENGE_MAX = 10  # 数学验证码最大值
-
 # REST Framework 配置
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -271,3 +271,20 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
+
+CORS_ALLOW_CREDENTIALS = True
+
+# Redis配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+DEBUG = True
+ALLOWED_HOSTS = ['*']  # 临时允许所有域名访问，ngrok 的域名也包含其中
+CORS_ALLOW_ALL_ORIGINS = True  # 允许所有来源访问

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/api/forgot-password/', {
+            const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/register1/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        if (password.length < 6) {
-            alert('密码长度不能少于6位');
+        if (password.length < 8) {
+            alert('密码长度不能少于8位');
             return;
         }
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             // 发送注册请求
-            const response = await fetch('http://127.0.0.1:8000/auth/api/register/', {
+            const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/register/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

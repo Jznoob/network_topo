@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = passwordInput.value;
 
         try {
-       
-
             // 发送登录请求
-            const response = await fetch('http://127.0.0.1:8000/auth/api/login/', {
+            //https://8dbf-111-22-34-251.ngrok-free.app/auth/api/reset-password/
+            //http://127.0.0.1:8000/auth/api/token/
+            const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/token/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (response.ok) {
                 // 登录成功
+                console.log('token:', data.access);
+                localStorage.setItem('jwt_token', data.access);
                 const successMessage = document.getElementById('successMessage');
                 if (successMessage) {
                     successMessage.style.display = 'block';

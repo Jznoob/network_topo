@@ -12,6 +12,7 @@ app_name = 'user_auth'
 urlpatterns = [
     # API endpoints
     path('api/register/', views.register_api, name='register_api'),
+    path('api/register1/', views.register_api_1, name='register_code'),
     path('api/login/', views.login_api, name='login_api'),
     path('api/logout/', LogoutApiView.as_view(), name='logout_api'),
     path('api/profile/', views.profile_api, name='profile_api'),

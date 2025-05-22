@@ -99,7 +99,6 @@ class CreateHistoryAPIView(APIView):
             user=user,
             description=data.get('description', ''),
             action=data.get('action', ''),
-            device_type=data.get('device_type', ''),
             data=data.get('data', {}),
             ip_address=request.META.get('REMOTE_ADDR', ''),
             user_agent=request.META.get('HTTP_USER_AGENT', ''),
@@ -120,11 +119,3 @@ class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ['created_at']
     ordering = ['-created_at']
 
-
-class HistoryDetailViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    查看具体某条操作中的字段变化详情
-    """
-    queryset = HistoryDetail.objects.select_related('history').all()
-    serializer_class = HistoryDetailSerializer
-    permission_classes = [IsAuthenticated]

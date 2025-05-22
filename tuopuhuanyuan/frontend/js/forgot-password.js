@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('请输入邮箱地址');
             return;
         }
-//api/forgot-password/
+                        //https://8dbf-111-22-34-251.ngrok-free.app/auth/api/reset-password/
+                        //http://127.0.0.1:8000/auth/api/reset-password/
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/api/forgot-password/', {
+            const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/reset-password/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/api/reset-password/', {
+            //https://8dbf-111-22-34-251.ngrok-free.app/auth/api/reset-password/
+            //http://127.0.0.1:8000/auth/api/reset-password/
+            const response = await fetch('https://8dbf-111-22-34-251.ngrok-free.app/auth/api/reset-password/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

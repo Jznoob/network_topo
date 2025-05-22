@@ -24,7 +24,6 @@ def save_topology(request):
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': '无效的JSON数据'}, status=400)
     return JsonResponse({'status': 'error', 'message': '仅支持POST请求'}, status=405)
-
 #@login_required
 def load_topology(request):
     if request.method == 'GET':
@@ -53,7 +52,7 @@ def analyze_topology(request):
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': '无效的JSON数据'}, status=400)
     return JsonResponse({'status': 'error', 'message': '仅支持POST请求'}, status=405)
-
+    
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def topology_list_api(request):
@@ -100,7 +99,7 @@ def topology_update_api(request, pk):
         topology = Topology.objects.get(pk=pk, user=request.user)
     except Topology.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
+    
     serializer = TopologySerializer(topology, data=request.data)
     if serializer.is_valid():
         serializer.save()
