@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from email_test import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('index.urls')),
@@ -27,5 +26,4 @@ urlpatterns = [
     path('history/', include('history.urls')),
     path('topology/', include('topology.urls')),
     path('captcha/', include('captcha.urls')),
-    path('email/', views.send_test_email, name='email_test'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

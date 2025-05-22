@@ -220,3 +220,38 @@ def reset_password_api(request):
         return Response({'error': '验证码错误或已使用'}, status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
         return Response({'error': '该邮箱未注册'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_password_api(request):
+    print(f"用户: {request.user}, 认证状态: {request.user.is_authenticated}")
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            print("POST data:", data)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': '无效的 JSON 数据'}, status=400)
+
+        old_password = data.get('old_password')
+        new_password = data.get('new_password')
+
+        print("old_password:", old_password)
+        print("new_password:", new_password and "存在")
+
+        if not old_password or not new_password:
+            return JsonResponse({'status': 'error', 'message': '旧密码和新密码不能为空'}, status=400)
+        if len(new_password) < 8:
+            return JsonResponse({'status': 'error', 'message': '新密码长度至少8位'}, status=400)
+
+        user = request.user
+        if check_password(old_password, user.password):
+            user.set_password(new_password)
+            user.save()
+            return JsonResponse({   
+               'status': 'success',
+               'message': '密码修改成功',
+            })
+        else:
+            return JsonResponse({'status': 'error', 'message': '旧密码错误'}, status=400)
+
+    return JsonResponse({'status': 'error', 'message': '不支持的请求方法'}, status=405)

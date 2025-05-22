@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('请输入邮箱地址');
             return;
         }
-
+//api/forgot-password/
         try {
             const response = await fetch('http://127.0.0.1:8000/auth/api/forgot-password/', {
                 method: 'POST',

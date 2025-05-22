@@ -14,6 +14,7 @@ class History(models.Model):
         ('import', '导入'),
     )
 
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='histories', verbose_name='用户')
     action = models.CharField(max_length=20, choices=ACTION_CHOICES, verbose_name='操作类型')
     description = models.CharField(max_length=200, verbose_name='操作描述')
