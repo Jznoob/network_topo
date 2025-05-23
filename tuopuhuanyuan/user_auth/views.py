@@ -97,7 +97,6 @@ def login_api(request):
             print("POST data:", data)
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': '无效的 JSON 数据'}, status=400)
-
         username = data.get('username')
         password = data.get('password')
 
