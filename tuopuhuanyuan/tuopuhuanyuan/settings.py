@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'config',
     'history',
     'topology',
+    'scanner',
     # 第三方应用
     'captcha',
     'rest_framework',
@@ -288,3 +289,5 @@ CACHES = {
 DEBUG = True
 ALLOWED_HOSTS = ['*']  # 临时允许所有域名访问，ngrok 的域名也包含其中
 CORS_ALLOW_ALL_ORIGINS = True  # 允许所有来源访问
+# Broker URL
+CELERY_BROKER_URL = 'redis://localhost:6379/0'

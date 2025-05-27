@@ -13,7 +13,7 @@ def net_topology_api(request):
     devices = Device.objects.all()
     nodes = []
     device_id_map = {} # 记录设备的id映射（方便前端使用）
-    
+
     for device in devices:
         node = {
             "id" : device.id,

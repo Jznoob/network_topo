@@ -26,4 +26,5 @@ urlpatterns = [
     path('history/', include('history.urls')),
     path('topology/', include('topology.urls')),
     path('captcha/', include('captcha.urls')),
+    path('scaner/', include('scanner.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

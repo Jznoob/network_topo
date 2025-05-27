@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('登录表单元素未找到');
         return;
     }
-
- 
-
+    
     // 登录表单提交
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();

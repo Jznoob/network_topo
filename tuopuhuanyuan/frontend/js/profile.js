@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', async () => {
     // 获取用户信息
     try {
+        
         const token = localStorage.getItem('jwt_token');
         if (!token) {
           throw new Error('No JWT token found');
